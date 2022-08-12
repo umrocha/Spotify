@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AlbumCreateDlg" widgetVar="AlbumCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAlbumTitle}">
+            <h:form id="AlbumCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{albumController.selected != null}">
+                      
+                        <p:outputLabel value="#{bundle.CreateAlbumLabel_nome}" for="nome" />
+                        <p:inputText id="nome" value="#{albumController.selected.nome}" title="#{bundle.CreateAlbumTitle_nome}" />
+                        <p:outputLabel value="#{bundle.CreateAlbumLabel_ano}" for="ano" />
+                        <p:inputText id="ano" value="#{albumController.selected.ano}" title="#{bundle.CreateAlbumTitle_ano}" />
+                        <p:outputLabel value="#{bundle.CreateAlbumLabel_artista}" for="artista" />
+                        <p:inputText id="artista" value="#{albumController.selected.artista}" title="#{bundle.CreateAlbumTitle_artista}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{albumController.create}" value="#{bundle.Save}" update="display,:AlbumListForm:datalist,:growl" oncomplete="handleSubmit(args,'AlbumCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AlbumCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
